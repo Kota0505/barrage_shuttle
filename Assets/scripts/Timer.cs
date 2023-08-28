@@ -7,7 +7,7 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    public float limit = 9;
+    public float limit = 7;
     public float timeCount = 0;
     TextMeshPro timelabel;
 
