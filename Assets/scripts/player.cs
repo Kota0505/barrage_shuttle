@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class player : MonoBehaviour
 {
+    float base_speed;
     Vector2 speed;
     // Start is called before the first frame update
     void Start()
@@ -14,6 +15,7 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        base_speed = 4.0f;
         speed = new Vector2(0, 0);
 
         float beside = Input.GetAxisRaw("Horizontal");
@@ -21,25 +23,25 @@ public class player : MonoBehaviour
         if(beside == -1)
 		{
 			//左方向の速度を付ける
-			speed += new Vector2(-2.5f, 0);
+			speed += new Vector2(-base_speed, 0);
 		}
 		
 		//Dキーが押されたら
 		else if(beside == 1)
 		{ 
-			speed += new Vector2(2.5f, 0);
+			speed += new Vector2(base_speed, 0);
 		} 
 
 		//Wキーが押されたら
 		if(vertical == 1)
 		{ 
-			speed += new Vector2(0, 2.5f);
+			speed += new Vector2(0, base_speed);
 		} 
 
 		//Sキーが押されたら
 		else if(vertical == -1)
 		{ 
-			speed += new Vector2(0, -2.5f);
+			speed += new Vector2(0, -base_speed);
 		} 
 
 		if(speed.x != 0 && speed.y != 0)

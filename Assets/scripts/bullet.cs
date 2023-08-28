@@ -13,6 +13,11 @@ public class bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(this.transform.position.y <-6)
+        {
+            Destroy(this.gameObject);
+        }
     }
+
+
 }
