@@ -11,21 +11,27 @@ public class Game_director : MonoBehaviour
     public Material red;
 
     //左上に表示するシャトルランの回数と表示するためのオブジェクト
-    int count = -1;
+    public int count = -1;
     string text_string; 
     TextMeshPro counter_text;
 
-    //左右のオブジェクトと右上のバツ印のオブジェクト
+    //左右のオブジェクトと右上のバツ印のオブジェクト、プレイヤーのオブジェクトを取得
     GameObject leftside;
     GameObject rightside;
     GameObject cross1;
     GameObject cross2;
+    GameObject player;
+    
 
     //それぞれのスクリプトオブジェクト
     Timer timer_script;
+    player player_script;
+
+    //右端と左端にたどり着いたかを表す変数
     public bool right_reached = true;
     public bool left_reached = true;
 
+    //遅れているかどうかの判定に使う変数。trueの状態でもう一度遅れたらゲームオーバー
     public bool late = false;
 
     //シャトルランのカウントごとの制限時間を保存した辞書
@@ -49,9 +55,11 @@ public class Game_director : MonoBehaviour
         rightside = GameObject.Find("rightside");
         cross1 = GameObject.Find("cross1");
         cross2 = GameObject.Find("cross2");
+        player = GameObject.Find("player");
 
         //それぞれのスクリプトを取得
         timer_script = this.gameObject.GetComponent<Timer>();
+        player_script = player.GetComponent<player>();
 
         //それぞれのオブジェクトを有効、無効にする
         Active_switch("rightside");
@@ -62,37 +70,53 @@ public class Game_director : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(right_reached);
-        Debug.Log($"ひだり{left_reached}");
-        if (timer_script.limit - timer_script.timeCount < 0)
+        //上のカウントが0になったら
+        if (timer_script.limit - timer_script.timeCount <= 0)
         {
+            //経過時間を初期化
             timer_script.timeCount = 0;
+            //左上のカウントを+1して反映させる
             count += 1;
             text_string = String.Format("{0:000}", count);
             counter_text.SetText(text_string);
+
+            player_script.safe = false;
+
+            //右端に向かって進むとき
             if (count % 2 == 0)
             {
+                //右端にたどり着いていたら
                 if (right_reached == true)
                 {
+                    //左側を有効にして右側を無効にする
                     Active_switch("leftside");
+                    //左側にたどり着いているかどうかを表す変数を初期化
                     left_reached = false;
+                    //バツ印がついていた時用にバツ印を無効にする
                     cross1.SetActive(false);
+                    //遅れを取り戻したのでlate変数を初期化する
                     late = false;
                 }
+                //右側にたどりついていなかったら
                 else
                 {
+                    //もし前回もたどり着くのが遅れていたら
                     if (late)
                     {
+                        //二つ目のバツ印を表示してゲームオーバーにする
                         cross2.SetActive(true);
                         gameover();
                     }
+                    //一つ目のバツ印を表示して、一回遅れた判定にする
                     cross1.SetActive(true);
                     late = true;
                 }
             }
 
+            //左端に向かって進むとき
             else
             {
+                //処理内容は右側の時と同様
                 if (left_reached == true)
                 {
                     Active_switch("rightside");
@@ -112,32 +136,41 @@ public class Game_director : MonoBehaviour
                 }
             }
 
+            //カウントが辞書のキーに含まれていたら
             if (limit_dic.ContainsKey(count))
             {
+                //制限時間を短くする
                 timer_script.limit = limit_dic[count];
             }
         }
+
+        //カウントが0ではないがバツ印が1つ付いてた場合(遅れてた場合)
         else if (cross1.activeSelf)
         {
+            //右側に向かって進むとき
             if (count % 2 == 0)
             {
+                //届いたら左側を表示する
                 if (right_reached == true)
                 {
                     Active_switch("leftside");
                 }
+                //届いていなければ、左側を表示しない
                 else
                 {
                     leftside.SetActive(false);
-                    left_reached = false;
                 }
             }
 
+            //左側に向かって進むとき
             else
             {
+                //届いたら右側を表示する
                 if (left_reached == true)
                 {
                     Active_switch("rightside");
                 }
+                //届いていなければ、右側を表示しない
                 else
                 {
                     rightside.SetActive(false);
@@ -147,6 +180,7 @@ public class Game_director : MonoBehaviour
         }
     }
 
+    //指定されたオブジェの有効無効を切り替える関数
     void Active_switch(string name)
     {
         if (name == "leftside")
@@ -169,6 +203,7 @@ public class Game_director : MonoBehaviour
         }
     }
 
+    //ゲームオーバー時に使用する関数
     void gameover()
     {
         //時間を止めて、playerを削除する

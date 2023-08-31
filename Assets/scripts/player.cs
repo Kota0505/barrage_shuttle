@@ -10,15 +10,26 @@ public class player : MonoBehaviour
     //実際にプレイヤーに与えられるスピード
     Vector2 speed;
 
+    //プレイヤーが無敵かどうかを表す変数
+    public bool safe;
+
+    GameObject director;
+    Game_director director_script;
+
     // Start is called before the first frame update
     void Start()
     {
+        safe = true;
         base_speed = 4.0f;
+
+        director = GameObject.Find("Game_director");
+        director_script = director.GetComponent<Game_director>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(director_script.count);
         speed = new Vector2(0, 0);
 
         //GetAxisRawでWASDと矢印キーでの移動を可能にする。戻り値は-1か1
@@ -28,15 +39,23 @@ public class player : MonoBehaviour
         //Aキーが押されたら
         if(beside == -1)
 		{
-			//左方向の速度を付ける
-			speed += new Vector2(-base_speed, 0);
+            //右端にたどり着いた時にプレイヤーが左へ動けないようにする（右端にたどり着いていなければ動ける）
+            if (!(safe == true && this.transform.position.x > 7.6 && (director_script.count%2==1 || director_script.count == -1)))
+            {
+                //左方向の速度を付ける
+                speed += new Vector2(-base_speed, 0);
+            }
 		}
 		
 		//Dキーが押されたら
 		else if(beside == 1)
 		{ 
-            //右方向の速度を付ける
-			speed += new Vector2(base_speed, 0);
+            //左端にたどり着いていなければ右方向へ進める
+            if (!(safe == true && this.transform.position.x < -7.6 && (director_script.count%2==0)))
+            {
+                //右方向の速度を付ける
+			    speed += new Vector2(base_speed, 0);
+            }
 		} 
 
 		//Wキーが押されたら
@@ -73,8 +92,8 @@ public class player : MonoBehaviour
 
     void OnTriggerStay(Collider collision)
     {
-        //弾に当たったら
-        if (collision.gameObject.tag == "bullet")
+        //弾に当たったときにプレイヤーが無敵でなければ
+        if (collision.gameObject.tag == "bullet" && safe == false)
         {
             //ゲームオーバ関数を呼び出す
             gameover();
