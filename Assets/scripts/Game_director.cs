@@ -45,7 +45,7 @@ public class Game_director : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        count = 17;
+        count = 107;
 
         //左上のカウンターへ初期値を設定する
         GameObject counter = GameObject.Find("Counter");

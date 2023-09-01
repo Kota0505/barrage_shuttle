@@ -8,7 +8,11 @@ public class Generator_bullet : MonoBehaviour
     public GameObject bullet_red_L;
     public GameObject bullet_red_M;
     public GameObject bullet_red_S;
-    public GameObject lazer;
+    public GameObject lazer_S;
+    public GameObject lazer_M;
+    public GameObject lazer_L;
+
+    GameObject lazer;
 
     //実際に発射する弾のオブジェクト
     GameObject bullet;
@@ -20,6 +24,10 @@ public class Generator_bullet : MonoBehaviour
     float x_speed;
     float y_speed;
     float interval = 0.5f;
+    int rotate;
+
+    //どこから弾を発射するかを決める変数
+    int dir = 0; 
 
     //経過時間を保存するオブジェクト
     float time;
@@ -67,19 +75,107 @@ public class Generator_bullet : MonoBehaviour
                 }
             }
 
-            if ((15<director_script.count) && (director_script.count<= 32))
+            else if ((15<director_script.count) && (director_script.count<= 32))
             {
-                interval = Random.Range(0.50f, 1.0f);
+                interval = Random.Range(0.25f, 1.0f);
                 x_pos = Random.Range(-8.0f, 8.0f);
                 normal_lazer(x_pos, 0);
                 if((23<director_script.count))
                 {
-                    size = Random.Range(1, 3);
+                    size = Random.Range(2, 4);
                     x_pos = Random.Range(-8.0f, 8.0f);
                     y_speed = Random.Range(-4.0f, -0.5f);
                     normal_bullet(size, x_pos, 5.5f, 0, y_speed);
                 }
             }
+
+            else if ((32<director_script.count) && (director_script.count <= 51))
+            {
+                size = Random.Range(1, 4);
+                interval = Random.Range(0.2f, 0.9f);
+                x_pos = Random.Range(-8.0f, 8.0f);
+                x_speed = Random.Range(-3.0f, 3.0f);
+                y_speed = Random.Range(-4.0f, -0.5f);
+                if (director_script.count <42)
+                {
+                    normal_bullet(size, x_pos, 5.5f, x_speed, y_speed);
+                }
+                else
+                {
+                    normal_bullet(size, x_pos, -5.5f, x_speed, -y_speed);
+                }
+            }
+
+            else if ((51<director_script.count) && (director_script.count <= 72))
+            {
+                size = Random.Range(2, 4);
+                interval = Random.Range(0.2f, 0.8f);
+                x_pos = Random.Range(-8.0f, 8.0f);
+
+                if (director_script.count<=61)
+                {
+                    x_speed = 0;
+                }
+                else
+                {
+                    x_speed = Random.Range(-3.0f, 3.0f);
+                }
+
+                y_speed = Random.Range(-4.0f, -0.5f);
+                dir = Random.Range(0, 2);
+                if (dir == 0)
+                {
+                    normal_bullet(size, x_pos, 5.5f, x_speed, y_speed);
+                }
+                else
+                {
+                    normal_bullet(size, x_pos, -5.5f, x_speed, -y_speed);
+                }
+            }
+
+            else if((72<director_script.count) && (director_script.count <= 83))
+            {
+                size = Random.Range(1, 4);
+                interval = Random.Range(0.1f, 0.7f);
+                x_speed = Random.Range(0.5f, 2.0f);
+                y_speed = Random.Range(-2.0f, 2.0f);
+                dir = Random.Range(2, 4);
+                if (dir == 2)
+                {
+                    normal_bullet(size, -8.0f, 0.0f, x_speed, y_speed);
+                }
+                else
+                {
+                    normal_bullet(size, 8.0f, 0.0f, -x_speed, y_speed);
+                }
+            }
+
+            else if((83<director_script.count) && (director_script.count <= 94))
+            {
+                interval = 1.2f;
+                for(int i = -5; i <=5;i+=2)
+                {
+                    normal_bullet(2, i, 5.5f, 0, -4.0f);
+                    normal_bullet(2, i, -5.5f, 0, 4.0f);
+                }
+            }
+
+            else if ((94<director_script.count) && (director_script.count <= 118))
+            {
+                size = Random.Range(2, 4);
+                interval = Random.Range(0.1f, 0.7f);
+                x_speed = Random.Range(-3.0f, 3.0f);
+                y_speed = Random.Range(-3.0f, 3.0f);
+                if (106<director_script.count)
+                {
+                    size = 1;
+                    rotate = Random.Range(0, 360);
+                    normal_lazer(0, 0, rotate, 2);
+                }
+                normal_bullet(size, 0, 0, x_speed, y_speed);
+            }
+
+
         }
     }
 
@@ -89,7 +185,7 @@ public class Generator_bullet : MonoBehaviour
         //sizeで分けてprefabから弾のオブジェクトを生成する
         if (size == 1)
         {
-            bullet = Instantiate(bullet_red_L, new Vector3(x_pos, y_pos, 0), Quaternion.identity);
+            bullet = Instantiate(bullet_red_S, new Vector3(x_pos, y_pos, 0), Quaternion.identity);
         }
 
         else if(size == 2)
@@ -99,14 +195,27 @@ public class Generator_bullet : MonoBehaviour
 
         else
         {
-            bullet = Instantiate(bullet_red_S, new Vector3(x_pos, y_pos, 0), Quaternion.identity);
+            bullet = Instantiate(bullet_red_L, new Vector3(x_pos, y_pos, 0), Quaternion.identity);
         }
 
         bullet.GetComponent<Rigidbody>().velocity = new Vector3(x_speed, y_speed, 0);
     }
 
-    void normal_lazer(float x_pos, float y_pos)
+    void normal_lazer(float x_pos, float y_pos, int rotate=0, int size=1)
     {
-        lazer = Instantiate(lazer, new Vector3(x_pos, y_pos, 0), Quaternion.identity);
+        if (size == 1)
+        {
+            lazer = Instantiate(lazer_S, new Vector3(x_pos, y_pos, 0), Quaternion.Euler(0, 0, rotate));
+        }
+
+        else if (size == 2)
+        {
+            lazer = Instantiate(lazer_M, new Vector3(x_pos, y_pos, 0), Quaternion.Euler(0, 0, rotate));
+        }
+
+        else
+        {
+            lazer = Instantiate(lazer_L, new Vector3(x_pos, y_pos, 0), Quaternion.Euler(0, 0, rotate));
+        }
     }
 }

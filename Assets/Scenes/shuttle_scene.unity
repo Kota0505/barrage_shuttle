@@ -1901,4 +1901,6 @@ MonoBehaviour:
   bullet_red_L: {fileID: 6004008860746131849, guid: 5bd2524df4f7f4141a22919e6dd5361d, type: 3}
   bullet_red_M: {fileID: 1489491058279425361, guid: 64eb0ced2548dcb45af218142b8b4811, type: 3}
   bullet_red_S: {fileID: 5588058085015461907, guid: b2f014c41e6dfcb46962ea581e62eda7, type: 3}
-  lazer: {fileID: 4342082471635708310, guid: 31b25b6d277735c4b9632f1e685ba6f4, type: 3}
+  lazer_S: {fileID: 4342082471635708310, guid: 31b25b6d277735c4b9632f1e685ba6f4, type: 3}
+  lazer_M: {fileID: 5316131479723653828, guid: 433d8ec4b9a034f4588b1e713224fd4e, type: 3}
+  lazer_L: {fileID: 0}
