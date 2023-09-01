@@ -18,7 +18,6 @@ public class lazer : MonoBehaviour
         image = this.gameObject.GetComponent<SpriteRenderer>();
         if (image.sprite.name == "lazer3")
         {
-            Debug.Log("bulletになりました");
             this.tag = "bullet";
         }
     }
