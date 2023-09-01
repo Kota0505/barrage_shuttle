@@ -11,7 +11,7 @@ public class Game_director : MonoBehaviour
     public Material red;
 
     //左上に表示するシャトルランの回数と表示するためのオブジェクト
-    public int count = -1;
+    public int count;
     string text_string; 
     TextMeshPro counter_text;
 
@@ -45,6 +45,8 @@ public class Game_director : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        count = 17;
+
         //左上のカウンターへ初期値を設定する
         GameObject counter = GameObject.Find("Counter");
         counter_text = counter.GetComponent<TextMeshPro>();

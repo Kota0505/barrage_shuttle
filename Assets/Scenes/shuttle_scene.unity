@@ -239,6 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21272422d60a80346a3adf429bf222e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  safe: 0
 --- !u!212 &292412712
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -347,6 +348,7 @@ GameObject:
   - component: {fileID: 318563684}
   - component: {fileID: 318563685}
   - component: {fileID: 318563686}
+  - component: {fileID: 318563687}
   m_Layer: 0
   m_Name: Game_director
   m_TagString: Untagged
@@ -396,9 +398,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 2100000, guid: e02be6e9c08f57945b7b5723bd723499, type: 2}
+  count: -1
   right_reached: 1
   left_reached: 1
-  late_count: 0
+  late: 0
 --- !u!82 &318563686
 AudioSource:
   m_ObjectHideFlags: 0
@@ -495,6 +498,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &318563687
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318563682}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 95cc29d81c42e3043a30a482579e36bb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &417443787
 GameObject:
   m_ObjectHideFlags: 0
@@ -1877,3 +1901,4 @@ MonoBehaviour:
   bullet_red_L: {fileID: 6004008860746131849, guid: 5bd2524df4f7f4141a22919e6dd5361d, type: 3}
   bullet_red_M: {fileID: 1489491058279425361, guid: 64eb0ced2548dcb45af218142b8b4811, type: 3}
   bullet_red_S: {fileID: 5588058085015461907, guid: b2f014c41e6dfcb46962ea581e62eda7, type: 3}
+  lazer: {fileID: 4342082471635708310, guid: 31b25b6d277735c4b9632f1e685ba6f4, type: 3}
