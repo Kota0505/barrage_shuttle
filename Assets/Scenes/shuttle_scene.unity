@@ -822,7 +822,7 @@ GameObject:
   - component: {fileID: 647839706}
   m_Layer: 0
   m_Name: wall_down
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1203,7 +1203,7 @@ GameObject:
   - component: {fileID: 873156344}
   m_Layer: 0
   m_Name: wall_right
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1590,7 +1590,7 @@ GameObject:
   - component: {fileID: 1838271477}
   m_Layer: 0
   m_Name: wall_up
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1771,7 +1771,7 @@ GameObject:
   - component: {fileID: 2001116134}
   m_Layer: 0
   m_Name: wall_left
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1898,9 +1898,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a692d6e8b1bcd9444999d9e0a9ca6d29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet_red_L: {fileID: 6004008860746131849, guid: 5bd2524df4f7f4141a22919e6dd5361d, type: 3}
-  bullet_red_M: {fileID: 1489491058279425361, guid: 64eb0ced2548dcb45af218142b8b4811, type: 3}
   bullet_red_S: {fileID: 5588058085015461907, guid: b2f014c41e6dfcb46962ea581e62eda7, type: 3}
+  bullet_red_M: {fileID: 1489491058279425361, guid: 64eb0ced2548dcb45af218142b8b4811, type: 3}
+  bullet_red_L: {fileID: 6004008860746131849, guid: 5bd2524df4f7f4141a22919e6dd5361d, type: 3}
+  bullet_green_S: {fileID: 7181096900289056231, guid: 466916fe426ff1641b54c8dc6466ca94, type: 3}
+  bullet_green_M: {fileID: 5868619935560821277, guid: 4398b4981d6568b4e92a281fc8eee8f8, type: 3}
+  bullet_green_L: {fileID: 1830459728491969274, guid: 857e878222535944baba5b866f9f1910, type: 3}
+  bullet_orange: {fileID: 150497889836369600, guid: 95d8025664389f240804a45b24970d40, type: 3}
+  bullet_purple: {fileID: 3388160662300026342, guid: d7176b93d95d77645a1c2a70d4d1d019, type: 3}
   lazer_S: {fileID: 4342082471635708310, guid: 31b25b6d277735c4b9632f1e685ba6f4, type: 3}
   lazer_M: {fileID: 5316131479723653828, guid: 433d8ec4b9a034f4588b1e713224fd4e, type: 3}
-  lazer_L: {fileID: 0}
+  lazer_L: {fileID: 6602047636491765879, guid: 3f68ed252e26be4468291d61d5edd080, type: 3}

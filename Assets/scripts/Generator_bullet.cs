@@ -12,6 +12,7 @@ public class Generator_bullet : MonoBehaviour
     public GameObject bullet_green_M;
     public GameObject bullet_green_L;
     public GameObject bullet_orange;
+    public GameObject bullet_purple;
     public GameObject lazer_S;
     public GameObject lazer_M;
     public GameObject lazer_L;
@@ -244,6 +245,7 @@ public class Generator_bullet : MonoBehaviour
                     normal_lazer(3, 0, -3.5f, 90);
                 }
             }
+
             else if ((171<=director_script.count) && (director_script.count<=200))
             {
                 //発射間隔、弾の大きさ、x座標、speedをランダムに決める
@@ -262,6 +264,80 @@ public class Generator_bullet : MonoBehaviour
                     //ランダムに下から垂直に降ってくる関数を呼び出す
                     normal_bullet(1, x_pos, -5.5f, 0, -y_speed);
                 }
+            }
+
+            else if((200<director_script.count) && (director_script.count<=215))
+            {
+                interval = Random.Range(0.3f, 0.4f);
+                x_speed = Random.Range(-4.0f, 4.0f);
+                y_speed = Random.Range(-2.0f, 2.0f);
+                purple_bullet(x_speed, y_speed);
+            }
+            
+            else if((215<director_script.count) && (director_script.count<= 231))
+            {
+                interval = Random.Range(0.8f, 1.0f);
+                for(int i=0;i<2;i++)
+                {
+                    if (i == 0)
+                    {
+                        x_pos = -8.0f;
+                        x_speed = Random.Range(1.0f, 4.0f);
+                    }
+                    else
+                    {
+                        x_pos = 8.0f;
+                        x_speed = Random.Range(-4.0f, -1.0f);
+                    }
+                    for(int j=0;j<2;j++)
+                    {
+                        if (j == 0)
+                        {
+                            y_pos = 5.5f;
+                            y_speed = Random.Range(-4.0f, -1.0f);
+                        }
+                        else
+                        {
+                            y_pos = -5.5f;
+                            y_speed = Random.Range(1.0f, 4.0f);
+                        }
+                        normal_bullet(1, x_pos, y_pos, x_speed, y_speed);
+
+                    }
+                }
+
+                y_pos = Random.Range(-5.5f, 5.5f);
+                normal_lazer(2, 0, y_pos, 90);
+            }
+
+            else if ((231<director_script.count) && (director_script.count<=247))
+            {
+                interval = Random.Range(0.4f, 0.5f);
+                size = Random.Range(1, 4);
+                x_pos = Random.Range(-8.0f, 8.0f);
+                x_speed = Random.Range(-2.0f, 2.0f);
+                y_speed = Random.Range(1.0f, 4.0f);
+                normal_bullet(size, x_pos, 5.5f, x_speed, -y_speed);
+                if (235 < director_script.count)
+                {
+                    green_bullet(size, x_pos);
+                }
+
+                if (239<director_script.count)
+                {
+                    y_pos = Random.Range(-5.5f, 5.5f);
+                    normal_lazer(2, 0, y_pos, 90);   
+                }
+                if (243 < director_script.count)
+                {
+                    y_speed = Random.Range(-2.0f, 2.0f);
+                    purple_bullet(x_speed, y_speed);
+                }
+            }
+
+            else if (247<director_script.count)
+            {
+                Debug.Log("クリア！");
             }
         }
     }
@@ -331,5 +407,10 @@ public class Generator_bullet : MonoBehaviour
         bullet.GetComponent<bullet_orange>().y_speed = y_speed;
         bullet = Instantiate(bullet_orange, new Vector3(x_pos, 5.5f, 0), Quaternion.identity);
         bullet.GetComponent<bullet_orange>().y_speed = -y_speed;
+    }
+    void purple_bullet(float x_speed, float y_speed)
+    {
+        bullet = Instantiate(bullet_purple, new Vector3(0, 0, 0), Quaternion.identity);
+        bullet.GetComponent<Rigidbody>().velocity = new Vector3(x_speed, y_speed, 0);
     }
 }
