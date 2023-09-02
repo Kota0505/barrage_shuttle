@@ -29,6 +29,11 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //デバッグ用
+        //safe = true;
+        
+        
+        
         speed = new Vector2(0, 0);
 
         //GetAxisRawでWASDと矢印キーでの移動を可能にする。戻り値は-1か1
