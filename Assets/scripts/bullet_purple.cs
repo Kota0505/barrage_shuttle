@@ -10,6 +10,7 @@ public class bullet_purple : MonoBehaviour
     void Start()
     {
         count = 0;
+        Destroy(this.gameObject, 50);
     }
 
     // Update is called once per frame

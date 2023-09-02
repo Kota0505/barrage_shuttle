@@ -59,7 +59,7 @@ public class Generator_bullet : MonoBehaviour
         {
             //弾を発射した時間を今に設定
             pretime = time;
-            if ((0<=director_script.count) && (director_script.count<=15))
+            if ((0<=director_script.count) && (director_script.count<15))
             {
                 //発射間隔、弾の大きさ、x座標、speedをランダムに決める
                 interval = Random.Range(0.25f, 1.0f);
@@ -67,7 +67,7 @@ public class Generator_bullet : MonoBehaviour
                 x_pos = Random.Range(-8.0f, 8.0f);
                 y_speed = Random.Range(-4.0f, -0.5f);
 
-                if (director_script.count <8)
+                if (director_script.count <7)
                 {
                     //ランダムに上から垂直に降ってくる関数を呼び出す
                     normal_bullet(size, x_pos, 5.5f, 0, y_speed);
@@ -80,12 +80,12 @@ public class Generator_bullet : MonoBehaviour
                 }
             }
 
-            else if ((15<director_script.count) && (director_script.count<= 32))
+            else if ((15<=director_script.count) && (director_script.count< 32))
             {
                 interval = Random.Range(0.25f, 1.0f);
                 x_pos = Random.Range(-8.0f, 8.0f);
                 normal_lazer(1, x_pos, 0);
-                if((23<director_script.count))
+                if((23<=director_script.count))
                 {
                     size = Random.Range(2, 4);
                     x_pos = Random.Range(-8.0f, 8.0f);
@@ -94,14 +94,14 @@ public class Generator_bullet : MonoBehaviour
                 }
             }
 
-            else if ((32<director_script.count) && (director_script.count <= 51))
+            else if ((32<=director_script.count) && (director_script.count < 51))
             {
                 size = Random.Range(1, 4);
                 interval = Random.Range(0.2f, 0.9f);
                 x_pos = Random.Range(-8.0f, 8.0f);
                 x_speed = Random.Range(-3.0f, 3.0f);
                 y_speed = Random.Range(-4.0f, -0.5f);
-                if (director_script.count <42)
+                if (director_script.count <41)
                 {
                     normal_bullet(size, x_pos, 5.5f, x_speed, y_speed);
                 }
@@ -111,13 +111,13 @@ public class Generator_bullet : MonoBehaviour
                 }
             }
 
-            else if ((51<director_script.count) && (director_script.count <= 72))
+            else if ((51<=director_script.count) && (director_script.count < 72))
             {
                 size = Random.Range(2, 4);
                 interval = Random.Range(0.2f, 0.8f);
                 x_pos = Random.Range(-8.0f, 8.0f);
 
-                if (director_script.count<=61)
+                if (director_script.count<61)
                 {
                     x_speed = 0;
                 }
@@ -138,7 +138,7 @@ public class Generator_bullet : MonoBehaviour
                 }
             }
 
-            else if((72<director_script.count) && (director_script.count <= 83))
+            else if((72<=director_script.count) && (director_script.count < 83))
             {
                 size = Random.Range(1, 4);
                 interval = Random.Range(0.1f, 0.7f);
@@ -155,7 +155,7 @@ public class Generator_bullet : MonoBehaviour
                 }
             }
 
-            else if((83<director_script.count) && (director_script.count <= 94))
+            else if((83<=director_script.count) && (director_script.count < 94))
             {
                 interval = 1.2f;
                 for(int i = -5; i <=5;i+=2)
@@ -165,13 +165,13 @@ public class Generator_bullet : MonoBehaviour
                 }
             }
 
-            else if ((94<director_script.count) && (director_script.count <= 118))
+            else if ((94<=director_script.count) && (director_script.count < 118))
             {
                 size = Random.Range(2, 4);
                 interval = Random.Range(0.1f, 0.7f);
                 x_speed = Random.Range(-3.0f, 3.0f);
                 y_speed = Random.Range(-3.0f, 3.0f);
-                if (106<director_script.count)
+                if (106<=director_script.count)
                 {
                     size = 1;
                     rotate = Random.Range(0, 360);
@@ -180,7 +180,7 @@ public class Generator_bullet : MonoBehaviour
                 normal_bullet(size, 0, 0, x_speed, y_speed);
             }
 
-            else if((118<director_script.count) && (director_script.count<= 131))
+            else if((118<=director_script.count) && (director_script.count< 131))
             {
                 size = Random.Range(1, 3);
                 interval = Random.Range(0.1f, 0.7f);
@@ -188,7 +188,7 @@ public class Generator_bullet : MonoBehaviour
                 green_bullet(size, x_pos);
             }
 
-            else if((131<director_script.count) && (director_script.count <= 144))
+            else if((131<=director_script.count) && (director_script.count < 144))
             {
                 size = Random.Range(1, 3);
                 interval = Random.Range(0.8f, 1.1f);
@@ -222,7 +222,7 @@ public class Generator_bullet : MonoBehaviour
                 }
             }
 
-            else if ((144 < director_script.count) && (director_script.count <= 157))
+            else if ((144 <= director_script.count) && (director_script.count < 157))
             {
                 interval = Random.Range(0.5f, 0.8f);
                 x_pos = Random.Range(-7.0f, 7.0f);
@@ -230,7 +230,7 @@ public class Generator_bullet : MonoBehaviour
                 orange_bullet(x_pos, y_speed);
             }
 
-            else if((157< director_script.count) && (director_script.count <= 171))
+            else if((157<= director_script.count) && (director_script.count < 171))
             {
                 interval = Random.Range(0.8f, 1.3f);
                 x_pos = Random.Range(-7.0f, 7.0f);
@@ -246,14 +246,14 @@ public class Generator_bullet : MonoBehaviour
                 }
             }
 
-            else if ((171<=director_script.count) && (director_script.count<=200))
+            else if ((171<=director_script.count) && (director_script.count<200))
             {
                 //発射間隔、弾の大きさ、x座標、speedをランダムに決める
                 interval = Random.Range(0.05f, 0.1f);
                 x_pos = Random.Range(-8.0f, 8.0f);
                 y_speed = Random.Range(-10.0f, -7.5f);
 
-                if (director_script.count <186)
+                if (director_script.count <=186)
                 {
                     //ランダムに上から垂直に降ってくる関数を呼び出す
                     normal_bullet(1, x_pos, 5.5f, 0, y_speed);
@@ -266,7 +266,7 @@ public class Generator_bullet : MonoBehaviour
                 }
             }
 
-            else if((200<director_script.count) && (director_script.count<=215))
+            else if((200<=director_script.count) && (director_script.count<215))
             {
                 interval = Random.Range(0.3f, 0.4f);
                 x_speed = Random.Range(-4.0f, 4.0f);
@@ -274,7 +274,7 @@ public class Generator_bullet : MonoBehaviour
                 purple_bullet(x_speed, y_speed);
             }
             
-            else if((215<director_script.count) && (director_script.count<= 231))
+            else if((215<=director_script.count) && (director_script.count< 231))
             {
                 interval = Random.Range(0.8f, 1.0f);
                 for(int i=0;i<2;i++)
@@ -310,7 +310,7 @@ public class Generator_bullet : MonoBehaviour
                 normal_lazer(2, 0, y_pos, 90);
             }
 
-            else if ((231<director_script.count) && (director_script.count<=247))
+            else if ((231<=director_script.count) && (director_script.count<=247))
             {
                 interval = Random.Range(0.4f, 0.5f);
                 size = Random.Range(1, 4);
