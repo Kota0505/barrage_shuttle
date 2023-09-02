@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class player : MonoBehaviour
 {
+    int HP = 3;
     //基本となるスピード
     float base_speed;
 
@@ -16,6 +17,13 @@ public class player : MonoBehaviour
     GameObject director;
     Game_director director_script;
 
+    GameObject life_1;
+    GameObject life_2;
+    GameObject life_3;
+
+    public Sprite player_image;
+    public Sprite player_damage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +32,9 @@ public class player : MonoBehaviour
 
         director = GameObject.Find("Game_director");
         director_script = director.GetComponent<Game_director>();
+        life_1 = GameObject.Find("life_1");
+        life_2 = GameObject.Find("life_2");
+        life_3 = GameObject.Find("life_3");
     }
 
     // Update is called once per frame
@@ -31,8 +42,6 @@ public class player : MonoBehaviour
     {
         //デバッグ用
         //safe = true;
-        
-        
         
         speed = new Vector2(0, 0);
 
@@ -44,7 +53,7 @@ public class player : MonoBehaviour
         if(beside == -1)
 		{
             //右端にたどり着いた時にプレイヤーが左へ動けないようにする（右端にたどり着いていなければ動ける）
-            if (!(safe == true && this.transform.position.x > 7.6 && (director_script.count%2==1 || director_script.count == -1)))
+            if (!(this.transform.position.x > 7.6 && (director_script.count%2==1 || director_script.count == -1)))
             {
                 //左方向の速度を付ける
                 speed += new Vector2(-base_speed, 0);
@@ -55,7 +64,7 @@ public class player : MonoBehaviour
 		else if(beside == 1)
 		{ 
             //左端にたどり着いていなければ右方向へ進める
-            if (!(safe == true && this.transform.position.x < -7.6 && (director_script.count%2==0)))
+            if (!(this.transform.position.x < -7.6 && (director_script.count%2==0)))
             {
                 //右方向の速度を付ける
 			    speed += new Vector2(base_speed, 0);
@@ -94,13 +103,29 @@ public class player : MonoBehaviour
 		this.GetComponent<Rigidbody>().velocity = speed;
     }
 
-    void OnTriggerStay(Collider collision)
+    void OnTriggerEnter(Collider collision)
     {
         //弾に当たったときにプレイヤーが無敵でなければ
         if (collision.gameObject.tag == "bullet" && safe == false)
         {
-            //ゲームオーバ関数を呼び出す
-            gameover();
+            if (HP == 1)
+            {
+                life_1.SetActive(false);
+                //ゲームオーバ関数を呼び出す
+                gameover();
+            }
+            else if (HP == 2)
+            {
+                HP -= 1;
+                life_2.SetActive(false);
+                StartCoroutine("late_safe_off");
+            }
+            else if (HP == 3)
+            {
+                HP -= 1;
+                life_3.SetActive(false);
+                StartCoroutine("late_safe_off");
+            }
         }
     }
 
@@ -109,5 +134,14 @@ public class player : MonoBehaviour
         //時間を止めて、playerを削除する
         Time.timeScale = 0;
         Destroy(this.gameObject);
+    }
+
+    IEnumerator late_safe_off()
+    {
+        safe = true;
+        this.GetComponent<SpriteRenderer>().sprite = player_damage;
+        yield return new WaitForSeconds(3);
+        this.GetComponent<SpriteRenderer>().sprite = player_image;
+        safe = false;
     }
 }

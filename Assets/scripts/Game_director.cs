@@ -20,6 +20,7 @@ public class Game_director : MonoBehaviour
     GameObject rightside;
     GameObject cross1;
     GameObject cross2;
+    GameObject pause;
     GameObject player;
     
 
@@ -34,6 +35,8 @@ public class Game_director : MonoBehaviour
     //遅れているかどうかの判定に使う変数。trueの状態でもう一度遅れたらゲームオーバー
     public bool late = false;
 
+    AudioSource BGM;
+
     //シャトルランのカウントごとの制限時間を保存した辞書
     Dictionary<int, float> limit_dic = new Dictionary<int, float>()
     {
@@ -45,7 +48,7 @@ public class Game_director : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        count = 229;
+        count = -1;
 
         //左上のカウンターへ初期値を設定する
         GameObject counter = GameObject.Find("Counter");
@@ -57,6 +60,7 @@ public class Game_director : MonoBehaviour
         rightside = GameObject.Find("rightside");
         cross1 = GameObject.Find("cross1");
         cross2 = GameObject.Find("cross2");
+        pause = GameObject.Find("pause");
         player = GameObject.Find("player");
 
         //それぞれのスクリプトを取得
@@ -67,11 +71,31 @@ public class Game_director : MonoBehaviour
         Active_switch("rightside");
         cross1.SetActive(false);
         cross2.SetActive(false);
+        pause.SetActive(false);
+
+        BGM = GetComponent<AudioSource>();
+
+        BGM.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (Time.timeScale == 1)
+            {
+                Time.timeScale = 0;
+                BGM.Pause();
+                pause.SetActive(true);
+            }
+            else
+            {
+                Time.timeScale = 1;
+                BGM.UnPause();
+                pause.SetActive(false);
+            }
+        }
         //上のカウントが0になったら
         if (timer_script.limit - timer_script.timeCount <= 0)
         {
