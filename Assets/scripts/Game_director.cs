@@ -81,6 +81,7 @@ public class Game_director : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log($"右側{right_reached}");
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (Time.timeScale == 1)
@@ -136,6 +137,7 @@ public class Game_director : MonoBehaviour
                     //一つ目のバツ印を表示して、一回遅れた判定にする
                     cross1.SetActive(true);
                     late = true;
+                    left_reached = false;
                 }
             }
 
@@ -159,6 +161,7 @@ public class Game_director : MonoBehaviour
                     }
                     cross1.SetActive(true);
                     late = true;
+                    right_reached = false;
                 }
             }
 

@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class bullet_purple : MonoBehaviour
 {
+    public AudioClip sound;
+    AudioSource audioSource;
+    
     int count;
     Vector3 speed;
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.PlayOneShot(sound);
         count = 0;
         Destroy(this.gameObject, 50);
     }

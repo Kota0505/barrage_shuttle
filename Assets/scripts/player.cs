@@ -103,7 +103,7 @@ public class player : MonoBehaviour
 		this.GetComponent<Rigidbody>().velocity = speed;
     }
 
-    void OnTriggerEnter(Collider collision)
+    void OnTriggerStay(Collider collision)
     {
         //弾に当たったときにプレイヤーが無敵でなければ
         if (collision.gameObject.tag == "bullet" && safe == false)
@@ -114,12 +114,14 @@ public class player : MonoBehaviour
                 //ゲームオーバ関数を呼び出す
                 gameover();
             }
+
             else if (HP == 2)
             {
                 HP -= 1;
                 life_2.SetActive(false);
                 StartCoroutine("late_safe_off");
             }
+
             else if (HP == 3)
             {
                 HP -= 1;

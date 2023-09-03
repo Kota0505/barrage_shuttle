@@ -3,7 +3,18 @@ guid: a692d6e8b1bcd9444999d9e0a9ca6d29
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - bullet_red_S: {instanceID: 0}
+  - bullet_red_M: {instanceID: 0}
+  - bullet_red_L: {instanceID: 0}
+  - bullet_green_S: {instanceID: 0}
+  - bullet_green_M: {instanceID: 0}
+  - bullet_green_L: {instanceID: 0}
+  - bullet_orange: {instanceID: 0}
+  - bullet_purple: {instanceID: 0}
+  - lazer_S: {instanceID: 0}
+  - lazer_M: {instanceID: 0}
+  - lazer_L: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
