@@ -5,9 +5,14 @@ using UnityEngine;
 //自分自身が画面外に出たら自信を削除するスクリプト
 public class bullet : MonoBehaviour
 {
+    public AudioClip sound;
+    AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.PlayOneShot(sound);
         Destroy(this.gameObject, 30);
     }
 

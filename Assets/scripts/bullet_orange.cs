@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class bullet_orange : MonoBehaviour
 {
+    public AudioClip sound;
+    AudioSource audioSource;
+
     public float y_speed;
     float x_speed;
     int cos_speed;
@@ -11,6 +14,9 @@ public class bullet_orange : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.PlayOneShot(sound);
+        
         cos_speed = Random.Range(2, 12);
     }
 

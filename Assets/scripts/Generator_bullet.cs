@@ -173,11 +173,10 @@ public class Generator_bullet : MonoBehaviour
                 y_speed = Random.Range(-3.0f, 3.0f);
                 if (106<=director_script.count)
                 {
-                    size = 1;
                     rotate = Random.Range(0, 360);
                     normal_lazer(2, 0, 0, rotate);
                 }
-                normal_bullet(size, 0, 0, x_speed, y_speed);
+                normal_bullet(1, 0, 0, x_speed, y_speed);
             }
 
             else if((118<=director_script.count) && (director_script.count< 131))
